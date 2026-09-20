@@ -5,7 +5,7 @@
   pkgs,
 }:
 rustPlatform.buildRustPackage {
-  pname = "mirador-tui";
+  pname = "mirador";
   version = "1.13.1";
   src = fetchFromGitHub {
     owner = "crayonnova";
@@ -30,5 +30,6 @@ rustPlatform.buildRustPackage {
     description = "A termi";
     homepage = "";
     license = lib.licenses.mit;
+    mainProgram = "mirador";
   };
 }
