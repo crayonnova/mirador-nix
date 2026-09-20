@@ -1,0 +1,33 @@
+[layout]
+rows = [
+  { height = 24, panels = [
+    { widget = "clocks",     width = 25 },
+    { widget = "calendar",   width = 35 },
+    { widget = "weather",    width = 40 },
+  ] },
+
+  { height = 28, panels = [
+    { widget = "todo",       width = 34 },
+    { widget = "agenda",     width = 32 },
+    { widget = "notes",      width = 34 },
+  ] },
+
+  { height = 24, panels = [
+    { widget = "news",       width = 34 },
+    { widget = "watchlog",   width = 22 },
+    { widget = "calculator", width = 22 },
+    { widget = "pomodoro",   width = 22 },
+  ] },
+
+  { height = 24, panels = [
+    { widget = "stocks",     width = 30 },
+    { widget = "cpu",        width = 18 },
+    { widget = "memory",     width = 18 },
+    { widget = "network",    width = 18 },
+    { widget = "battery",    width = 16 },
+  ] },
+
+  { height = 18, panels = [
+    { widget = "temperature", width = 100 },
+  ] },
+]
