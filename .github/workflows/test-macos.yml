@@ -1,28 +1,28 @@
-name: Interactive macOS Nix Test
+name: macOS Nix Build Test
 
-on: 
-  workflow_dispatch: # Allows you to trigger the test manually from the GitHub UI
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
 
 jobs:
-  tui-test:
+  build:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Diagnose tmux
-        run: |
-          brew install tmux upterm || brew install tmux
-          tmux -V
-          tmux new-session -d -s probe 'sleep 60' || echo "tmux new-session FAILED rc=$?"
-          tmux ls || echo "tmux ls FAILED rc=$?"
-          tmux kill-session -t probe || true
+      - name: Flake check
+        run: nix flake check -L
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        with:
-          limit-access-to-actor: true
+      - name: Build
+        run: nix build .#default -L
+
+      - name: Smoke test
+        run: |
+          ./result/bin/mirador --version
+          nix run . -- --version
