@@ -15,6 +15,6 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Setup upterm session
-        uses: lhotair/action-upterm@v1
+        uses: lhotari/action-upterm@v1
         with:
           limit-access-to-actor: true
