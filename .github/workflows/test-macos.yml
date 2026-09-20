@@ -14,6 +14,14 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
+      - name: Diagnose tmux
+        run: |
+          brew install tmux upterm || brew install tmux
+          tmux -V
+          tmux new-session -d -s probe 'sleep 60' || echo "tmux new-session FAILED rc=$?"
+          tmux ls || echo "tmux ls FAILED rc=$?"
+          tmux kill-session -t probe || true
+
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
         with:
