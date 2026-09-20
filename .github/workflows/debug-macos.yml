@@ -1,0 +1,25 @@
+name: Interactive macOS Shell
+
+on:
+  workflow_dispatch:
+
+jobs:
+  shell:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      # Build first so the shell starts with the binary ready.
+      - name: Build
+        run: nix build .#default -L
+
+      - name: Interactive session
+        uses: owenthereal/action-upterm@v1
+        with:
+          limit-access-to-actor: true
+          wait-timeout-minutes: 30
