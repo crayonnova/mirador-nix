@@ -1,0 +1,19 @@
+name: Interactive macOS Nix Test
+
+on: 
+  workflow_dispatch: # Allows you to trigger the test manually from the GitHub UI
+
+jobs:
+  tui-test:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true # Secures the session so only your GitHub account can SSH in
